@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的导航</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<header></header>
+	<main>
+		<div class="wrapper" id="mainX">
+			
+		</div>
+	</main>
+	<footer></footer>
+
+	<script>
+		var keys = {
+			'0': ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o','p'],
+			'1': ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+			'2': ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+			'length': 3
+		}
+		var hash = {
+			'q': 'qq.com',
+			'w': 'weibo.com',
+			'e': 'ele.me',
+			'r': 'renren.com',
+			't': 'tianya.com',
+			'y': 'yahoo.cn',
+			'u': 'uc.com',
+			'i': 'iqiyi.com',
+			'o': 'opera.com',
+			'p': undefined,
+			'a': 'acfun.tv',
+			's': 'sohu.com',
+			'z': 'zhihu.com',
+			'm': 'www.mcdonalds.com.cn'
+		}
+		//取出来localStorage中的uuu对应的hash
+		var hashInLocalStorage = JSON.parse(localStorage.getItem('uuu')) || '';
+		
+		if (hashInLocalStorage) {
+			hash = hashInLocalStorage;
+		}
+
+		index = 0;
+		while (index < keys['length']) {
+			divX = document.createElement('div');
+			mainX.appendChild(divX);
+			rows = keys[index];
+			console.log(rows);
+
+			index2 = 0;
+			while (index2 < rows.length) {
+				kbdX = document.createElement('kbd');
+				kbdX.textContent = rows[index2];
+				buttonX = document.createElement('button');
+				buttonX.textContent = '编辑';
+				buttonX.id = rows[index2];
+				buttonX.onclick = function(xzkjcnxlkcjlk) {
+					key = xzkjcnxlkcjlk.target.id;
+					x = prompt('给我一个网址');
+					hash[key] = x; //hash 变更
+					localStorage.setItem('uuu', JSON.stringify(hash));
+				}
+				kbdX.appendChild(buttonX);
+				divX.appendChild(kbdX);
+				index2 = index2 + 1;
+			}
+			index++;
+		}
+
+		document.onkeypress = function(xzkjcnxlkcjlk) {
+			key = xzkjcnxlkcjlk['key']; // q w e
+			website = hash[key];
+			console.log(website);
+			window.open('http://' + website);
+			//location.href = 'http://' + website;
+		}
+
+	</script>
+</body>
+</html>
